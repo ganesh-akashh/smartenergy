@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, ActivityIndicator, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
 import { MaterialIcons } from '@expo/vector-icons';
-import { FIREBASE_AUTH } from "../firebase"
 import { signInWithEmailAndPassword } from 'firebase/auth';
-
+import {auth} from "../firebase"
+import { getUserData, storeUserData } from '../utils/storage';
 const LoginScreen = () => {
 
-    const auth = FIREBASE_AUTH;
+    
 
     const [formValues, setFormValues] = useState({
         email: '',
@@ -20,23 +20,30 @@ const LoginScreen = () => {
 
 
 
-
     const handleChange = (name, value) => {
         setFormValues({ ...formValues, [name]: value });
     };
+
+
 
 
     const handleSubmit = async () => {
         setLoading(true);
         try {
             const response = await signInWithEmailAndPassword(auth, formValues.email, formValues.password);
+            await storeUserData(response.user, 'userData');
+            console.log("Response from the login function");
             console.log(response.user.email);
+          
         } catch (error) {
+            console.log(error.message);
             setError(true);
         } finally {
             setLoading(false)
         }
     }
+
+
 
     return (
         <TouchableWithoutFeedback

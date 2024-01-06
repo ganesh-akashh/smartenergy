@@ -4,10 +4,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 import LoginScreen from './screens/LoginScreen';
 import * as SplashScreen from 'expo-splash-screen';
+import { getUserData } from './utils/storage';
 
 SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
+
+
+
 
 const App = () => {
 
@@ -20,6 +24,8 @@ const App = () => {
 
   const [appIsReady, setAppIsReady] = useState(false);
 
+
+  const [user , setUser] = useState(null);
   const loadAssetsAsync = async () => {
     await SplashScreen.hideAsync();
   };
@@ -28,8 +34,15 @@ const App = () => {
     if (fontsLoaded) {
       loadAssetsAsync().then(() => setAppIsReady(true));
     }
+    const getUser = async () => {
+      const user = await getUserData('userData');
+      setUser(user);
+    }
+    getUser();
   }, [fontsLoaded]);
 
+
+  console.log(user);
   if (!appIsReady) {
     return null;
   }
