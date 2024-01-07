@@ -1,6 +1,5 @@
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
-// ...
 
 const storage = ReactNativeAsyncStorage;
 

@@ -1,19 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, ActivityIndicator, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
 import { MaterialIcons } from '@expo/vector-icons';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import {auth} from "../firebase"
-import { getUserData, storeUserData } from '../utils/storage';
+import { auth } from "../firebase"
+import { storeUserData } from '../utils/storage';
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { loadAuth } from '../redux/reducers/auth';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { FIRESTORE_DB } from '../firebase';
+
 const LoginScreen = () => {
 
-    
+    const db = FIRESTORE_DB;
 
     const [formValues, setFormValues] = useState({
         email: '',
         password: '',
     });
 
+    const dispatch = useDispatch();
+    const userRef = collection(db, "users");
+  
+
+    const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
 
     const [error, setError] = useState(false);
@@ -32,9 +43,29 @@ const LoginScreen = () => {
         try {
             const response = await signInWithEmailAndPassword(auth, formValues.email, formValues.password);
             await storeUserData(response.user, 'userData');
-            console.log("Response from the login function");
-            console.log(response.user.email);
-          
+            console.log(response.user);
+            if (response.user) {
+                navigation.navigate("Home");
+                const q = query(userRef, where("uid", "==", user.uid));
+                const querySnapshot = await getDocs(q);
+                const data = querySnapshot.docs.map((doc) => ({
+                    ...doc.data(),
+                    id: doc.id,
+                }));
+                if (data.length > 0) {
+                    dispatch(
+                        loadAuth({
+                            token: user.refreshToken,
+                            role: data[0].role,
+                            uid: data[0].uid,
+                            docId: data[0].id,
+                        })
+                    );
+                } else {
+                    setError(true);
+                }
+            }
+
         } catch (error) {
             console.log(error.message);
             setError(true);
@@ -69,16 +100,16 @@ const LoginScreen = () => {
                 >
                     <View className="flex items-center mx-5  space-y-4">
                         <Animated.View
-                            entering={FadeInDown.duration(1000).springify()}
-                            className={`border p-[5%] ${error ? "border-red-500": "border-gray-500"} relative rounded-2xl w-full mb-1`}>
-                            <MaterialIcons name='email' size={18} style={{ position: 'absolute', left: 10, top: 17 }} />
+                            entering={FadeInUp.duration(1000).springify()}
+                            className={`border p-[5%] ${error ? "border-red-500" : "border-gray-500"} rounded-2xl w-full mb-1`}>
+
                             <TextInput
                                 placeholder="Email Address"
                                 value={formValues.email}
                                 name="email"
                                 placeholderTextColor={'gray'}
                                 onChangeText={(text) => handleChange('email', text)}
-                                style={{ fontFamily: 'poppins-semibold', paddingLeft: 20 }}
+                                style={{ fontFamily: 'poppins-semibold' }}
                                 keyboardType="email-address"
                                 className="text-gray-700"
                                 autoCapitalize='none'
@@ -86,9 +117,10 @@ const LoginScreen = () => {
                         </Animated.View>
 
                         <Animated.View
-                            entering={FadeInDown.delay(200).duration(1000).springify()}
-                            className={`border p-[5%] ${error ? "border-red-500": "border-gray-500"} relative rounded-2xl w-full mb-1`}>
-                            <MaterialIcons name='lock' size={18} style={{ position: 'absolute', left: 10, top: 17 }} />
+                            entering={FadeInDown.delay(400).duration(1000).springify()}
+                            className={`border p-4 ${error ? "border-red-500" : "border-gray-500"} relative  rounded-2xl w-full mb-1`}>
+
+
                             <TextInput
                                 placeholder="Password"
                                 value={formValues.password}
@@ -96,17 +128,17 @@ const LoginScreen = () => {
                                 onChangeText={(text) => handleChange('password', text)}
                                 name="password"
                                 secureTextEntry
-                                style={{ fontFamily: 'poppins-semibold', paddingLeft: 20 }}
+                                style={{ fontFamily: 'poppins-semibold' }}
                                 className="text-gray-700"
                             />
                         </Animated.View>
+
                         <Animated.View
                             className="w-full"
-                            entering={FadeInDown.delay(400).duration(1000).springify()}
-
+                            entering={FadeInDown.delay(600).duration(1000).springify()}
                         >
                             <TouchableOpacity
-                                onPress={handleSubmit} className={`w-full  bg-emerald-800   p-[4%] rounded-xl mb-3`}
+                                onPress={handleSubmit} className={`w-full  bg-emerald-700  p-[4%] rounded-xl mb-3`}
                             >
                                 {loading ?
                                     <ActivityIndicator color="white" /> :

@@ -3,29 +3,29 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 import LoginScreen from './screens/LoginScreen';
+import HomeScreen from './screens/HomeScreen';
+import { Provider } from 'react-redux';
 import * as SplashScreen from 'expo-splash-screen';
-import { getUserData } from './utils/storage';
+import { store } from './redux/store';
 
 SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
 
-
-
-
 const App = () => {
 
- const [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
     'poppins-light': require('./assets/fonts/Poppins-Light.ttf'),
     'poppins-medium': require('./assets/fonts/Poppins-Medium.ttf'),
     'poppins-semibold': require('./assets/fonts/Poppins-SemiBold.ttf'),
+    'poppins-bold': require('./assets/fonts/Poppins-Bold.ttf'),
+      'poppins-extrabold': require('./assets/fonts/Poppins-ExtraBold.ttf'),
+    'lobster-regular': require('./assets/fonts/Lobster-Regular.ttf')
   });
 
   const [appIsReady, setAppIsReady] = useState(false);
 
-
-  const [user , setUser] = useState(null);
   const loadAssetsAsync = async () => {
     await SplashScreen.hideAsync();
   };
@@ -34,25 +34,21 @@ const App = () => {
     if (fontsLoaded) {
       loadAssetsAsync().then(() => setAppIsReady(true));
     }
-    const getUser = async () => {
-      const user = await getUserData('userData');
-      setUser(user);
-    }
-    getUser();
   }, [fontsLoaded]);
 
-
-  console.log(user);
   if (!appIsReady) {
     return null;
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
+          <Stack.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 
