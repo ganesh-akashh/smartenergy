@@ -15,7 +15,15 @@ const HomeScreen = () => {
 
   const widthAndHeight = 280
   const series = [30, 70]
-  const sliceColor = ['#BF3131','#15c75a']
+  const sliceColor = ['#BF3131', '#15c75a']
+
+  const data = [
+    { name: 'Akash', points: 120 },
+    { name: 'Haricharan', points: 50 },
+    { name: 'Nandhaana', points: 50 },
+    { name: 'Kesavan ', points: 40 },
+    { name: 'Maysa', points: 35 },
+  ];
 
 
 
@@ -136,6 +144,7 @@ const HomeScreen = () => {
             className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-white ml-2 mr-2 mt-5 px-2 py-1 "
             entering={FadeInUp.delay(1000).duration(1000).springify()}
           >
+
             <View className="flex flex-col  p-6">
               <Text className="text-xl text-center  text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-medium' }}>
                 Task Status
@@ -158,6 +167,34 @@ const HomeScreen = () => {
             </View>
 
           </Animated.View>
+
+          <Animated.View
+            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-white ml-2 mr-2 mt-5 px-2 py-1 "
+            entering={FadeInUp.delay(1000).duration(1000).springify()}
+          >
+
+            <View className="flex flex-col  p-6">
+
+              <Text className="text-xl text-center  text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-medium' }}>
+                Top performers
+              </Text>
+
+              <View className="flex gap-3 mt-5">
+                {data.map((item, index) => (
+                  <View key={index} className="flex-row flex-wrap border-b p-2 border-[#e1e1ea]  justify-between">
+                    <View className="flex-row gap-2 items-center">
+                      <Text className="text-base" style={{ fontFamily: 'poppins-bold' }}>{index + 1}.</Text>
+                      <Text className="text-lg text-gray-700" style={{ fontFamily: 'poppins-medium' }}>{item.name}</Text>
+                    </View>
+                    <Text className="text-base" style={{ fontFamily: 'poppins-medium' }}>{item.points} points</Text>
+                  </View>
+                ))}
+              </View>
+
+            </View>
+
+          </Animated.View>
+
         </View>
       </ScrollView>
 
