@@ -3,7 +3,7 @@ import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 const storage = ReactNativeAsyncStorage;
 
-export const storeUserData = async (userData,key) => {
+export const storeUserData = async (userData, key) => {
   try {
     await storage.setItem(key, JSON.stringify(userData));
     console.log('User data stored locally.');
@@ -15,12 +15,13 @@ export const storeUserData = async (userData,key) => {
 export const getUserData = async (key) => {
   try {
     const userData = await storage.getItem(key);
-    if(userData != null){
-        return JSON.parse(userData);
-    }else{
-        return null;
+    if (userData != null) {
+      return JSON.parse(userData);
+    } else {
+      return null;
     }
   } catch (error) {
     console.error('Error getting user data:', error);
   }
 };
+

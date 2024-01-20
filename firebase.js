@@ -1,26 +1,26 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-// import {getAuth} from "firebase/auth"
+
 import { getFirestore } from "firebase/firestore";
-import { initializeAuth, getReactNativePersistence, getAuth } from 'firebase/auth';
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAgmTs3Rt26sOxWQYBDRS2ACW6SmygnifA",
-  authDomain: "adminmanagementt.firebaseapp.com",
-  projectId: "adminmanagementt",
-  storageBucket: "adminmanagementt.appspot.com",
-  messagingSenderId: "491949801480",
-  appId: "1:491949801480:web:2c70fd640b2aae159951bd",
-  measurementId: "G-46MKQF1Y3D"
+  apiKey: "AIzaSyBeqhVTvoKaR0GlBo9aub6__1PLSUNF52I",
+  authDomain: "smart-irrigation-98540.firebaseapp.com",
+  databaseURL: "https://smart-irrigation-98540-default-rtdb.firebaseio.com",
+  projectId: "smart-irrigation-98540",
+  storageBucket: "smart-irrigation-98540.appspot.com",
+  messagingSenderId: "298107680780",
+  appId: "1:298107680780:web:2c75692fe9513471471629",
+  measurementId: "G-5FM87NKRGG"
 };
 
 
-// Initialize Firebase
 export const FIREBASE_APP = initializeApp(firebaseConfig);
 
-export const auth = initializeAuth(FIREBASE_APP, {  
-  persistence: getReactNativePersistence(ReactNativeAsyncStorage)       
+export const auth = initializeAuth(FIREBASE_APP, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
 });
 
-export const FIRESTORE_DB =  getFirestore(FIREBASE_APP);
+export const FIRESTORE_DB = getFirestore(FIREBASE_APP);

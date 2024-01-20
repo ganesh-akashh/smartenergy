@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { FIRESTORE_DB } from '../firebase';
 
+
 const LoginScreen = () => {
 
     const db = FIRESTORE_DB;
@@ -21,7 +22,7 @@ const LoginScreen = () => {
 
     const dispatch = useDispatch();
     const userRef = collection(db, "users");
-  
+   
 
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
@@ -34,7 +35,7 @@ const LoginScreen = () => {
         setFormValues({ ...formValues, [name]: value });
     };
 
-
+  
 
 
     const handleSubmit = async () => {
@@ -85,13 +86,22 @@ const LoginScreen = () => {
             >
 
 
-                <View className="flex-1 mb-[12%]  flex-row justify-center items-end">
+                <View className="flex-1 mb-[12%]  justify-end items-center">
                     <Animated.Image
                         entering={FadeInUp.delay(200).duration(1000).springify()}
-                        source={require('../assets/images/logo.jpeg')}
-                        style={{ width: 240, height: 160 }}
+                        source={require('../assets/images/icon.png')}
+                        style={{ width: 80, height: 80 }}
                     />
+                    <View className="text-center mt-5">
+                        <Text
+                            style={{ fontFamily: 'lobster-regular' }}
+                            className="text-5xl   text-blue-600"
+                        >
+                            Geo Lens
+                        </Text>
+                    </View>
                 </View>
+
 
                 <View
                     className={`flex-1   px-4 pt-10 space-y-3 border   border-[#dadde0] `}
@@ -137,7 +147,7 @@ const LoginScreen = () => {
                             entering={FadeInDown.delay(600).duration(1000).springify()}
                         >
                             <TouchableOpacity
-                                onPress={handleSubmit} className={`w-full  bg-emerald-700  p-[4%] rounded-xl mb-3`}
+                                onPress={handleSubmit} className={`w-full bg-blue-700  p-[4%] rounded-xl mb-3`}
                             >
                                 {loading ?
                                     <ActivityIndicator color="white" /> :

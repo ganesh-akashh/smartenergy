@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import { Provider } from 'react-redux';
 import * as SplashScreen from 'expo-splash-screen';
 import { store } from './redux/store';
+
 
 SplashScreen.preventAutoHideAsync();
 
@@ -43,7 +44,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
           <Stack.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
         </Stack.Navigator>
