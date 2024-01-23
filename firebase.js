@@ -6,14 +6,13 @@ import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBeqhVTvoKaR0GlBo9aub6__1PLSUNF52I",
-  authDomain: "smart-irrigation-98540.firebaseapp.com",
-  databaseURL: "https://smart-irrigation-98540-default-rtdb.firebaseio.com",
-  projectId: "smart-irrigation-98540",
-  storageBucket: "smart-irrigation-98540.appspot.com",
-  messagingSenderId: "298107680780",
-  appId: "1:298107680780:web:2c75692fe9513471471629",
-  measurementId: "G-5FM87NKRGG"
+  apiKey: "AIzaSyB8-ByuJk3TM_BApQPHO-DS-vYu_w_OFCI",
+  authDomain: "smartenergy-cfbc5.firebaseapp.com",
+  projectId: "smartenergy-cfbc5",
+  storageBucket: "smartenergy-cfbc5.appspot.com",
+  messagingSenderId: "307385160196",
+  appId: "1:307385160196:web:75067cd8b6b344ecd39b51",
+  measurementId: "G-2K3WR1KZN9"
 };
 
 

@@ -3,78 +3,41 @@ import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, Activity
 import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase"
-import { storeUserData } from '../utils/storage';
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { loadAuth } from '../redux/reducers/auth';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import { FIRESTORE_DB } from '../firebase';
+
 
 
 const LoginScreen = () => {
 
-    const db = FIRESTORE_DB;
-
+    
     const [formValues, setFormValues] = useState({
         email: '',
         password: '',
     });
 
-    const dispatch = useDispatch();
-    const userRef = collection(db, "users");
-   
-
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
     const [loading, setLoading] = useState(false);
-
     const [error, setError] = useState(false);
-
-
 
     const handleChange = (name, value) => {
         setFormValues({ ...formValues, [name]: value });
     };
 
-  
-
-
     const handleSubmit = async () => {
         setLoading(true);
         try {
             const response = await signInWithEmailAndPassword(auth, formValues.email, formValues.password);
-            await storeUserData(response.user, 'userData');
             console.log(response.user);
-            if (response.user) {
-                navigation.navigate("Home");
-                const q = query(userRef, where("uid", "==", user.uid));
-                const querySnapshot = await getDocs(q);
-                const data = querySnapshot.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }));
-                if (data.length > 0) {
-                    dispatch(
-                        loadAuth({
-                            token: user.refreshToken,
-                            role: data[0].role,
-                            uid: data[0].uid,
-                            docId: data[0].id,
-                        })
-                    );
-                } else {
-                    setError(true);
-                }
-            }
-
         } catch (error) {
             console.log(error.message);
             setError(true);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }
-
-
 
     return (
         <TouchableWithoutFeedback
@@ -84,14 +47,12 @@ const LoginScreen = () => {
                 className="flex-1 bg-white"
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
-
-
                 <View className="flex-1 mb-[12%]  justify-end items-center">
-                    <Animated.Image
+                    {/* <Animated.Image
                         entering={FadeInUp.delay(200).duration(1000).springify()}
                         source={require('../assets/images/icon.png')}
                         style={{ width: 80, height: 80 }}
-                    />
+                    /> */}
                     <View className="text-center mt-5">
                         <Text
                             style={{ fontFamily: 'lobster-regular' }}
