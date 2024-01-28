@@ -14,8 +14,8 @@ const WelcomeScreen = () => {
             <View className="flex-[0.45] justify-center items-center" style={{ marginTop: marginValue }}>
                 <Image
                     source={require('../assets/images/welcome.jpg')}
-                    style={{ width: 300, height: 300 }}
-                    className="rounded-lg "
+                    style={{ width: 250, height: 250 }}
+                    className="rounded-sm"
                 />
             </View>
 
@@ -41,7 +41,7 @@ const WelcomeScreen = () => {
                     </Text>
                 </View>
                 <View>
-                    <TouchableOpacity className="px-2 py-3 rounded-xl bg-yellow-500">
+                    <TouchableOpacity className="px-2 py-3 rounded-xl bg-yellow-500" onPress={()=> navigation.navigate("Login")}>
                         <Text
                             style={{ fontFamily: 'poppins-semibold' }}
                             className="text-gray-800 text-center text-base"
