@@ -1,6 +1,19 @@
 {
   "expo": {
-    "name": "native",
-    "slug": "native"
+    "name": "Skcet",
+    "icon": "./assets/images/welcome.png",
+    "slug": "native",
+    "extra": {
+      "eas": {
+        "projectId": "914ed332-f97b-40d7-83e6-93a0258cb99a"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/welcome.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.example.app"
+    }
   }
 }

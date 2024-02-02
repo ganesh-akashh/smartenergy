@@ -2,9 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from "../screens/HomeScreen"
-import WelcomeScreen from '../screens/WelcomeScreen';
 import { useEffect, useState } from 'react';
-import SplashScreenn from '../screens/SplashScreenn';
 import { useDispatch } from 'react-redux';
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -54,10 +52,9 @@ const Navigation = () => {
 
 
     if (loading) {
-        return (
-            <SplashScreenn />
-        )
+        return null;
     }
+    
     return (
         <NavigationContainer>
             <Stack.Navigator>
@@ -79,7 +76,6 @@ const Navigation = () => {
 
                     : (
                         <>
-                            <Stack.Screen name="Welcome" options={{ headerShown: false }} component={WelcomeScreen} />
                             <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
                         </>
                     )}

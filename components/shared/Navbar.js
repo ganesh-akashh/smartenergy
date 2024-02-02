@@ -47,8 +47,8 @@ const Navbar = ({ type }) => {
         entering={FadeInUp.delay(200).duration(1000).springify()}
       >
         <Image
-          source={require('../../assets/images/login.jpg')}
-          style={{ width: 30, height: 30 }}
+          source={require('../../assets/images/login.png')}
+          style={{ width: 35, height: 30 }}
         />
         <Text
           style={{ fontFamily: 'poppins-semibold' }}

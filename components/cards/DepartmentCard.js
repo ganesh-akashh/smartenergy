@@ -1,11 +1,12 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 
 const DepartmentCard = () => {
   return (
-    <View>
-      <Text>DepartmentCard</Text>
-    </View>
+    <TouchableOpacity className="rounded-md border  border-[#f8f8f9]  shadow-sm bg-[#FFFFFF]">
+     
+
+    </TouchableOpacity>
   )
 }
 

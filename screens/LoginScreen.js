@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, ActivityIndicator, TouchableWithoutFeedback, Keyboard, StatusBar } from 'react-native'
+import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, ActivityIndicator, TouchableWithoutFeedback, Keyboard, StatusBar ,Image } from 'react-native'
 import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase"
@@ -50,8 +50,7 @@ const LoginScreen = () => {
                         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                     >
                         <View className="flex-1  justify-end mb-[10%] items-center">
-                            <Animated.Image
-                                entering={FadeInUp.delay(200).duration(1000).springify()}
+                            <Image
                                 source={require('../assets/images/skcet.png')}
                                 style={{ width: 180, height: 180 }}
                             />
@@ -61,8 +60,7 @@ const LoginScreen = () => {
                             style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50 }}
                         >
                             <View className="flex items-center mx-5  space-y-4">
-                                <Animated.View
-                                    entering={FadeInUp.duration(1000).springify()}
+                                <View
                                     className={`border p-[5%] ${error ? "border-red-500" : "border-gray-500"} rounded-2xl w-full mb-1`}>
                                     <TextInput
                                         placeholder="Email Address"
@@ -75,10 +73,9 @@ const LoginScreen = () => {
                                         className="text-gray-700"
                                         autoCapitalize='none'
                                     />
-                                </Animated.View>
+                                </View>
 
-                                <Animated.View
-                                    entering={FadeInDown.delay(400).duration(1000).springify()}
+                                <View
                                     className={`border p-4 ${error ? "border-red-500" : "border-gray-500"} relative  rounded-2xl w-full mb-1`}>
                                     <TextInput
                                         placeholder="Password"
@@ -90,11 +87,10 @@ const LoginScreen = () => {
                                         style={{ fontFamily: 'poppins-semibold' }}
                                         className="text-gray-700"
                                     />
-                                </Animated.View>
+                                </View>
 
-                                <Animated.View
+                                <View
                                     className="w-full"
-                                    entering={FadeInDown.delay(600).duration(1000).springify()}
                                 >
                                     <TouchableOpacity
                                         onPress={handleSubmit} className={`w-full bg-blue-800  p-[4%] rounded-xl mb-3`}
@@ -104,7 +100,7 @@ const LoginScreen = () => {
                                             <Text className="font-medium text-white  text-center" style={{ fontFamily: 'poppins-semibold' }}>Sign In</Text>
                                         }
                                     </TouchableOpacity>
-                                </Animated.View>
+                                </View>
                             </View>
                         </View>
                     </KeyboardAvoidingView>

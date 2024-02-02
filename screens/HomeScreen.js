@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StatusBar, ScrollView, Image, Pressable, TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native'
+import { View, Text, SafeAreaView, StatusBar, ScrollView, Image, Pressable, TouchableOpacity, Dimensions, ActivityIndicator, Platform } from 'react-native'
 import Navbar from '../components/shared/Navbar'
 import { useEffect, useState } from 'react'
 import { db } from '../firebase'
@@ -18,6 +18,8 @@ const HomeScreen = () => {
 
 
 
+
+
   useEffect(() => {
     try {
       const databaseRef = ref(db);
@@ -25,6 +27,8 @@ const HomeScreen = () => {
       if (databaseRef) {
         onValue(databaseRef, (snapshot) => {
           const newData = snapshot.val();
+
+          console.log(newData.phase1);
           if (newData != null && newData.phase1 != null && newData.phase2 != null && newData.phase3 != null) {
             setVoltageData1(newData.phase1.voltage);
             setVoltageData2(newData.phase2.voltage);
@@ -33,7 +37,6 @@ const HomeScreen = () => {
             setCurrentData2(newData.phase2.current);
             setCurrentData3(newData.phase3.current);
           } else {
-
           }
         });
       }
@@ -54,7 +57,7 @@ const HomeScreen = () => {
             <ActivityIndicator color="black" />
           </View>
         ) : (
-          <ScrollView>
+          <ScrollView className="flex-1" bounces={true} overScrollMode={Platform.OS === 'android' ? 'always' : 'auto'} >
             <View className="flex-1  py-4 px-2">
 
               <Animated.View
@@ -138,7 +141,7 @@ const HomeScreen = () => {
                   >{currentData2} amps</Text>
                 </View>
 
-                <View className="flex flex-row items-center">
+                <View className="flex flex-row border-gray-300 border-b-2 pb-4 items-center">
                   <Text
                     style={{ fontFamily: 'poppins-semibold' }}
                     className="text-gray-800 px-2  mt-4  text-xl"
@@ -148,6 +151,15 @@ const HomeScreen = () => {
                     className="text-gray-800 px-2  mt-4  text-lg"
                   >{currentData3} amps</Text>
                 </View>
+
+                <View className="mt-2">
+                  <Text
+                    style={{ fontFamily: 'poppins-regular' }}
+                    className="text-gray-800 text-center px-2  mt-4  text-lg"
+                  > Made With ❤️ Akash</Text>
+                </View>
+
+
 
 
 

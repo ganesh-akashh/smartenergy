@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView, StatusBar } from 'react-native'
 import Navbar from '../components/shared/Navbar'
+import DepartmentCard from '../components/cards/DepartmentCard'
 
 
 const departments = [
@@ -39,6 +40,9 @@ const DepartmentScreen = () => {
                 <Text style={{ fontFamily: 'poppins-semibold' }} className="text-2xl text-center p-3 mt-5">
                     Department Blocks
                 </Text>
+                <View className="py-4 px-3">
+                    <DepartmentCard />
+                </View>
             </View>
         </SafeAreaView>
     )
