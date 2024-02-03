@@ -32,7 +32,7 @@ const DrawerContent = ({ navigation }) => {
             <HomeModernIcon color="#286bb9" size={20} />
             <Text className="text-lg text-blue-800" style={{ fontFamily: 'poppins-medium' }}>Total Energy</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex gap-2 items-center flex-row" onPress={() => handleDrawerItemPress('Home')}>
+          <TouchableOpacity className="flex gap-2 items-center flex-row" onPress={() => handleDrawerItemPress('Admin')}>
             <BuildingLibraryIcon color="#286bb9" size={20} />
             <Text className="text-lg text-blue-800" style={{ fontFamily: 'poppins-medium' }}>Admin Block</Text>
           </TouchableOpacity>

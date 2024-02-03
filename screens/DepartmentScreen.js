@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StatusBar } from 'react-native'
+import { View, Text, SafeAreaView, StatusBar, ScrollView } from 'react-native'
 import Navbar from '../components/shared/Navbar'
 import DepartmentCard from '../components/cards/DepartmentCard'
 
@@ -21,6 +21,10 @@ const departments = [
         imgUrl: "",
     },
     {
+        title: "MECH",
+        imgUrl: "",
+    },
+    {
         title: "MCA",
         imgUrl: "",
     },
@@ -31,19 +35,25 @@ const departments = [
 ]
 
 
+
+
 const DepartmentScreen = () => {
     return (
         <SafeAreaView className="flex-1 bg-[#FFFFFF] flex space-y-3" edges={['top']}>
-            <StatusBar style="dark" />
+            <StatusBar style="light" />
             <Navbar type="main" />
-            <View className="flex-1 bg-[#f8f8f8] space-y-3">
-                <Text style={{ fontFamily: 'poppins-semibold' }} className="text-2xl text-center p-3 mt-5">
+            <ScrollView className="flex-1  ">
+                <Text style={{ fontFamily: 'poppins-semibold' }} className="text-2xl text-center p-3 my-4">
                     Department Blocks
                 </Text>
-                <View className="py-4 px-3">
-                    <DepartmentCard />
+                <View className="flex-1 bg-[#f8f8f8]" >
+                    <View className="py-3  px-4">
+                        {departments.map((item, index) => (
+                            <DepartmentCard key={index} title={item.title} imgUrl={item.imgUrl} />
+                        ))}
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }

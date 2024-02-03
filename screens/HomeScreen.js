@@ -2,9 +2,10 @@ import { View, Text, SafeAreaView, StatusBar, ScrollView, Image, Pressable, Touc
 import Navbar from '../components/shared/Navbar'
 import { useEffect, useState } from 'react'
 import { db } from '../firebase'
-import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
+
 
 import { onValue, ref } from "firebase/database"
+import ImageSlider from '../components/shared/ImageSlider';
 
 const HomeScreen = () => {
 
@@ -57,21 +58,14 @@ const HomeScreen = () => {
             <ActivityIndicator color="black" />
           </View>
         ) : (
-          <ScrollView className="flex-1" bounces={true} overScrollMode={Platform.OS === 'android' ? 'always' : 'auto'} >
-            <View className="flex-1  py-4 px-2">
+          <ScrollView className="flex-1 bg-[#FFFFFF]" bounces={true} overScrollMode={Platform.OS === 'android' ? 'always' : 'auto'} >
+            <View className="flex-1  py-4">
 
-              <Animated.View
-                entering={FadeInUp.delay(200).duration(1000).springify()}
-                className="px-2"
+              <ImageSlider />
+              <View
+
+                className="px-4"
               >
-                <Pressable>
-                  <Image
-                    source={require('../assets/images/hero.png')}
-                    className="w-full mt-2 rounded-lg"
-                    style={{ height: 250 }}
-                  />
-                </Pressable>
-
                 <Text
                   style={{ fontFamily: 'poppins-semibold' }}
                   className="text-xl mt-10"
@@ -141,7 +135,7 @@ const HomeScreen = () => {
                   >{currentData2} amps</Text>
                 </View>
 
-                <View className="flex flex-row border-gray-300 border-b-2 pb-4 items-center">
+                <View className="flex flex-row pb-4 items-center">
                   <Text
                     style={{ fontFamily: 'poppins-semibold' }}
                     className="text-gray-800 px-2  mt-4  text-xl"
@@ -151,20 +145,7 @@ const HomeScreen = () => {
                     className="text-gray-800 px-2  mt-4  text-lg"
                   >{currentData3} amps</Text>
                 </View>
-
-                <View className="mt-2">
-                  <Text
-                    style={{ fontFamily: 'poppins-regular' }}
-                    className="text-gray-800 text-center px-2  mt-4  text-lg"
-                  > Made With ❤️ Akash</Text>
-                </View>
-
-
-
-
-
-
-              </Animated.View>
+              </View>
             </View>
           </ScrollView>
 

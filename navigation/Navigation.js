@@ -10,6 +10,7 @@ import { loadAuth } from '../redux/reducers/auth';
 import DrawerContent from '../components/shared/DrawerContent';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DepartmentScreen from '../screens/DepartmentScreen';
+import AdminBlockScreen from '../screens/AdminBlockScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -70,6 +71,7 @@ const Navigation = () => {
                             >
                                 <Drawer.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
                                 <Drawer.Screen name='Department' options={{headerShown:false}} component={DepartmentScreen} />
+                                <Drawer.Screen name='Admin' options={{headerShown:false}} component={AdminBlockScreen} />
                             </Drawer.Navigator>
                         )}
                     </Stack.Screen>
